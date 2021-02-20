@@ -1,0 +1,8 @@
+{
+    "/auth/*": {
+        "target": "https://key.ikanet.ml/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

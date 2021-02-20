@@ -1,0 +1,384 @@
+<div class="breadcrumb">
+    <h1>User Profile</h1>
+    <ul>
+        <li><a href="">Pages</a></li>
+        <li>User Profile</li>
+    </ul>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<!-- CARD ICON -->
+<div class="nk-content nk-content-fluid">
+    <div class="container-xl wide-lg">
+        <div class="nk-content-body">
+            <div class="nk-block-head">
+                <div class="nk-block-head-content">
+                    <div class="nk-block-head-sub"><span>Account Setting</span></div>
+                    <h2 class="nk-block-title fw-normal">My Profile</h2>
+                    <div class="nk-block-des">
+                        <p>You have full control to manage your own account setting. <span class="text-primary"><em class="icon ni ni-info" data-toggle="tooltip" data-placement="right" title="Tooltip on right"></em></span></p>
+                    </div>
+                </div>
+            </div><!-- .nk-block-head -->
+
+            <ul ngbNav #nav="ngbNav"  class="nav-pills nk-nav nav nav-tabs">
+                <li ngbNavItem="top" class="nav-item">
+                    <a ngbNavLink class="nav-link">Informaiton Personel</a>
+                    <ng-template ngbNavContent>
+                      <!-- NK-Block @s -->
+                      <div class="nk-block">
+                        <div class="alert alert-warning">
+                            <div class="alert-cta flex-wrap flex-md-nowrap">
+                                <div class="alert-text">
+                                    <p>Upgrade your account to unlock full feature and increase your limit of transaction amount.</p>
+                                </div>
+                                <ul class="alert-actions gx-3 mt-3 mb-1 my-md-0">
+                                    <li class="order-md-last">
+                                        <a href="#" class="btn btn-sm btn-warning">Upgrade</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="link link-primary">Learn More</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div><!-- .alert -->
+                        <div class="nk-block-head">
+                            <div class="nk-block-head-content">
+                                <h5 class="nk-block-title">Personal Information</h5>
+                                <div class="nk-block-des">
+                                    <p>Basic info, like your name and address, that you use on Nio Platform.</p>
+                                </div>
+                            </div>
+                        </div><!-- .nk-block-head -->
+                        <div class="nk-data data-list">
+                            <div class="data-head">
+                                <h6 class="overline-title">Basics</h6>
+                            </div>
+                            <div class="data-item" data-toggle="modal" data-target="#profile-edit">
+                                <div class="data-col">
+                                    <span class="data-label">Full Name</span>
+                                    <span class="data-value">Abu Bin Ishtiyak</span>
+                                </div>
+                                <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                            </div><!-- .data-item -->
+                            <div class="data-item" data-toggle="modal" data-target="#profile-edit">
+                                <div class="data-col">
+                                    <span class="data-label">Display Name</span>
+                                    <span class="data-value">Ishtiyak</span>
+                                </div>
+                                <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                            </div><!-- .data-item -->
+                            <div class="data-item">
+                                <div class="data-col">
+                                    <span class="data-label">Email</span>
+                                    <span class="data-value">info@softnio.com</span>
+                                </div>
+                                <div class="data-col data-col-end"><span class="data-more disable"><em class="icon ni ni-lock-alt"></em></span></div>
+                            </div><!-- .data-item -->
+                            <div class="data-item" data-toggle="modal" data-target="#profile-edit">
+                                <div class="data-col">
+                                    <span class="data-label">Phone Number</span>
+                                    <span class="data-value text-soft">Not add yet</span>
+                                </div>
+                                <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                            </div><!-- .data-item -->
+                            <div class="data-item" data-toggle="modal" data-target="#profile-edit">
+                                <div class="data-col">
+                                    <span class="data-label">Date of Birth</span>
+                                    <span class="data-value">29 Feb, 1986</span>
+                                </div>
+                                <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                            </div><!-- .data-item -->
+                            <div class="data-item" data-toggle="modal" data-target="#profile-edit" data-tab-target="#address">
+                                <div class="data-col">
+                                    <span class="data-label">Address</span>
+                                    <span class="data-value">2337 Kildeer Drive,<br>Kentucky, Canada</span>
+                                </div>
+                                <div class="data-col data-col-end"><span class="data-more"><em class="icon ni ni-forward-ios"></em></span></div>
+                            </div><!-- .data-item -->
+                        </div><!-- .nk-data -->
+                        <div class="nk-data data-list">
+                            <div class="data-head">
+                                <h6 class="overline-title">Preferences</h6>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-col">
+                                    <span class="data-label">Language</span>
+                                    <span class="data-value">English (United State)</span>
+                                </div>
+                                <div class="data-col data-col-end"><a href="#" data-toggle="modal" data-target="#profile-language" class="link link-primary">Change Language</a></div>
+                            </div><!-- .data-item -->
+                            <div class="data-item">
+                                <div class="data-col">
+                                    <span class="data-label">Date Format</span>
+                                    <span class="data-value">M d, YYYY</span>
+                                </div>
+                                <div class="data-col data-col-end"><a href="#" data-toggle="modal" data-target="#profile-language" class="link link-primary">Change</a></div>
+                            </div><!-- .data-item -->
+                            <div class="data-item">
+                                <div class="data-col">
+                                    <span class="data-label">Timezone</span>
+                                    <span class="data-value">Bangladesh (GMT +6)</span>
+                                </div>
+                                <div class="data-col data-col-end"><a href="#" data-toggle="modal" data-target="#profile-language" class="link link-primary">Change</a></div>
+                            </div><!-- .data-item -->
+                        </div><!-- .nk-data -->
+                    </div>
+                    </ng-template>
+                </li>
+
+                <li ngbNavItem="Security" class="nav-item">
+                    <a ngbNavLink class="nav-link">Securité</a>
+                    <ng-template ngbNavContent>
+                        <div class="nk-block">
+                            <div class="nk-block-head">
+                                <div class="nk-block-head-content">
+                                    <h5 class="nk-block-title">Security Settings</h5>
+                                    <div class="nk-block-des">
+                                        <p>These settings are helps you keep your account secure.</p>
+                                    </div>
+                                </div>
+                            </div><!-- .nk-block-head -->
+                            <div class="card card-bordered">
+                                <div class="card-inner-group">
+                                    <div class="card-inner">
+                                        <div class="between-center flex-wrap flex-md-nowrap g-3">
+                                            <div class="nk-block-text">
+                                                <h6>Save my Activity Logs</h6>
+                                                <p>You can save your all activity logs including unusual activity detected.</p>
+                                            </div>
+                                            <div class="nk-block-actions">
+                                                <ul class="align-center gx-3">
+                                                    <li class="order-md-last d-inline-flex">
+                                                        <div class="custom-control custom-switch mr-n2">
+                                                            <input type="checkbox" class="custom-control-input" id="activity-log">
+                                                            <label class="custom-control-label" for="activity-log"></label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#recent-activity" class="link link-sm link-primary">See Recent Activity</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div><!-- .card-inner -->
+                                    <div class="card-inner">
+                                        <div class="between-center flex-wrap flex-md-nowrap g-3">
+                                            <div class="nk-block-text">
+                                                <h6>Security Pin Code</h6>
+                                                <p>You can set your pin code, we will ask you on your withdraw and transfer funds.</p>
+                                            </div>
+                                            <div class="nk-block-actions">
+                                                <div class="custom-control custom-switch mr-n2">
+                                                    <input type="checkbox" class="custom-control-input" id="security-pin">
+                                                    <label class="custom-control-label" for="security-pin"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- .card-inner -->
+                                    <div class="card-inner">
+                                        <div class="between-center flex-wrap flex-md-nowrap g-3">
+                                            <div class="nk-block-text">
+                                                <h6>Change Password</h6>
+                                                <p>Set a unique password to protect your account.</p>
+                                            </div>
+                                            <div class="nk-block-actions flex-shrink-sm-0">
+                                                <ul class="align-center flex-wrap flex-sm-nowrap gx-3 gy-2">
+                                                    <li class="order-md-last">
+                                                        <a href="#" class="btn btn-primary">Change Password</a>
+                                                    </li>
+                                                    <li>
+                                                        <em class="text-soft text-date fs-12px">Last changed: <span>Oct 2, 2019</span></em>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div><!-- .card-inner -->
+                                    <div class="card-inner">
+                                        <div class="between-center flex-wrap flex-md-nowrap g-3">
+                                            <div class="nk-block-text">
+                                                <h6>2FA Authentication <span class="badge badge-success">Enabled</span></h6>
+                                                <p>Secure your account with 2FA security. When it is activated you will need to enter not only your password, but also a special code using app. You can receive this code by in mobile app. </p>
+                                            </div>
+                                            <div class="nk-block-actions">
+                                                <a href="#" class="btn btn-primary">Disable</a>
+                                            </div>
+                                        </div>
+                                    </div><!-- .card-inner -->
+                                </div><!-- .card-inner-group -->
+                            </div><!-- .card -->
+                            <div class="nk-block-head nk-block-head-sm">
+                                <div class="nk-block-head-content">
+                                    <div class="nk-block-title-group">
+                                        <h6 class="nk-block-title title">Recent Activity</h6>
+                                        <a href="html/invest/profile-activity.html" class="link">See full log</a>
+                                    </div>
+                                    <div class="nk-block-des">
+                                        <p>This information about the last login activity on your account.</p>
+                                    </div>
+                                </div>
+                            </div><!-- .nk-block-head -->
+                            <div class="card card-bordered">
+                                <table class="table table-ulogs">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="tb-col-os"><span class="overline-title">Browser <span class="d-sm-none">/ IP</span></span></th>
+                                            <th class="tb-col-ip"><span class="overline-title">IP</span></th>
+                                            <th class="tb-col-time"><span class="overline-title">Time</span></th>
+                                            <th class="tb-col-action"><span class="overline-title">&nbsp;</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="tb-col-os">Chrome on Window</td>
+                                            <td class="tb-col-ip"><span class="sub-text">192.149.122.128</span></td>
+                                            <td class="tb-col-time"><span class="sub-text">11:34 PM</span></td>
+                                            <td class="tb-col-action"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb-col-os">Mozilla on Window</td>
+                                            <td class="tb-col-ip"><span class="sub-text">86.188.154.225</span></td>
+                                            <td class="tb-col-time"><span class="sub-text">Nov 20, 2019 <span class="d-none d-sm-inline-block">10:34 PM</span></span></td>
+                                            <td class="tb-col-action"><a href="#" class="link-cross mr-sm-n1"><em class="icon ni ni-cross"></em></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tb-col-os">Chrome on iMac</td>
+                                            <td class="tb-col-ip"><span class="sub-text">192.149.122.128</span></td>
+                                            <td class="tb-col-time"><span class="sub-text">Nov 12, 2019 <span class="d-none d-sm-inline-block">08:56 PM</span></span></td>
+                                            <td class="tb-col-action"><a href="#" class="link-cross mr-sm-n1"><em class="icon ni ni-cross"></em></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div><!-- .card -->
+                        </div><!-- .nk-block -->
+                    </ng-template>
+                </li>
+
+                <li ngbNavItem="notifications">
+                    <a ngbNavLink>Notifications</a>
+                    <ng-template ngbNavContent>
+                        <div class="nk-block">
+                            <div class="nk-block-head nk-block-head-sm">
+                                <div class="nk-block-head-content">
+                                    <h5 class="nk-block-title">Security Alerts</h5>
+                                    <div class="nk-block-des">
+                                        <p>You will get only those email notification what you want.</p>
+                                    </div>
+                                </div>
+                            </div><!-- .nk-block-head -->
+                            <div class="nk-block-content">
+                                <div class="gy-3">
+                                    <div class="g-item">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" checked id="unusual-activity">
+                                            <label class="custom-control-label" for="unusual-activity">Email me whenever encounter unusual activity</label>
+                                        </div>
+                                    </div>
+                                    <div class="g-item">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="new-browser">
+                                            <label class="custom-control-label" for="new-browser">Email me if new browser is used to sign in</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- .nk-block-contnet -->
+                            <div class="nk-block-head nk-block-head-sm">
+                                <div class="nk-block-head-content">
+                                    <h6 class="nk-block-title">News</h6>
+                                    <div class="nk-block-des">
+                                        <p>You will get only those email notification what you want.</p>
+                                    </div>
+                                </div>
+                            </div><!-- .nk-block-head -->
+                            <div class="nk-block-content">
+                                <div class="gy-3">
+                                    <div class="g-item">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" checked id="latest-sale">
+                                            <label class="custom-control-label" for="latest-sale">Notify me by email about sales and latest news</label>
+                                        </div>
+                                    </div>
+                                    <div class="g-item">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="feature-update">
+                                            <label class="custom-control-label" for="feature-update">Email me about new features and updates</label>
+                                        </div>
+                                    </div>
+                                    <div class="g-item">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" checked id="account-tips">
+                                            <label class="custom-control-label" for="account-tips">Email me about tips on using account</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- .nk-block-content -->
+                        </div><!-- .nk-block -->
+                    </ng-template>
+                </li>
+
+                <li ngbNavItem="social">
+                    <a ngbNavLink>Social</a>
+                    <ng-template ngbNavContent>
+                        <div class="nk-block">
+                            <div class="nk-block-head">
+                                <div class="nk-block-head-content">
+                                    <h5 class="nk-block-title">Connected with Social Account</h5>
+                                    <div class="nk-block-des">
+                                        <p>You can connect with your social account such as facebook, google etc to make easier to login into account.</p>
+                                    </div>
+                                </div>
+                            </div><!-- .nk-block-head -->
+                            <h6 class="lead-text">Connect to Facebook</h6>
+                            <div class="card card-bordered">
+                                <div class="card-inner">
+                                    <div class="between-center flex-wrap flex-md-nowrap g-3">
+                                        <div class="media media-center gx-3 wide-xs">
+                                            <div class="media-object">
+                                                <em class="icon icon-circle icon-circle-lg ni ni-facebook-f"></em>
+                                            </div>
+                                            <div class="media-content">
+                                                <p>You have successfully connected with your facebook account, you can easily log in using your account too.</p>
+                                            </div>
+                                        </div>
+                                        <div class="nk-block-actions flex-shrink-0">
+                                            <a href="#" class="btn btn-lg btn-danger">Revoke Access</a>
+                                        </div>
+                                    </div>
+                                </div><!-- .card-inner -->
+                            </div><!-- .card -->
+                            <h6 class="lead-text">Connect to Google</h6>
+                            <div class="card card-bordered">
+                                <div class="card-inner">
+                                    <div class="between-center flex-wrap flex-md-nowrap g-3">
+                                        <div class="media media-center gx-3 wide-xs">
+                                            <div class="media-object">
+                                                <em class="icon icon-circle icon-circle-lg ni ni-google"></em>
+                                            </div>
+                                            <div class="media-content">
+                                                <p>You can connect with your google account. <em class="d-block text-soft">Not connected yet</em></p>
+                                            </div>
+                                        </div>
+                                        <div class="nk-block-actions flex-shrink-0">
+                                            <a href="#" class="btn btn-lg btn-light">Connect</a>
+                                        </div>
+                                    </div>
+                                </div><!-- .card-inner -->
+                            </div><!-- .card -->
+                            <div class="nk-block-head nk-block-head-sm">
+                                <div class="nk-block-head-content">
+                                    <h6 class="nk-block-title">Import Contacts <a href="#" class="link link-primary ml-auto">Import from Google</a></h6>
+                                    <div class="nk-block-des">
+                                        <p>You have not imported contacts from your mobile phone.</p>
+                                    </div>
+                                </div>
+                            </div><!-- .nk-block-head -->
+                        </div>
+                    </ng-template>
+                </li>
+            </ul>
+
+            <div [ngbNavOutlet]="nav" class="ml-4"></div>
+        </div>
+    </div>
+</div>

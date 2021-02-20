@@ -1,0 +1,204 @@
+<div class="breadcrumb">
+    <h1>Depot</h1>
+    <ul>
+      <li><a href="">Ops</a></li>
+      <li>Depot</li>
+    </ul>
+</div>
+  
+<div class="separator-breadcrumb border-top"></div>
+
+<!-- content @s -->
+<div class="nk-content nk-content-fluid">
+    <div class="container-xl wide-lg">
+        <div class="nk-content-body">
+            <div class="buysell wide-xs m-auto">
+                <div class="buysell-title text-center">
+                    <h2 class="title">Faire un deposit!</h2>
+                </div><!-- .buysell-title -->
+                <div class="buysell-block">
+                    <form action="#" class="buysell-form">
+                        <div class="buysell-field form-group">
+                            <div class="form-label-group">
+                                <label class="form-label">Compte d'opération</label>
+                            </div>
+                            <input type="hidden" value="btc" name="bs-currency" id="buysell-choose-currency">
+                            <div class="dropdown buysell-cc-dropdown">
+                                <a href="#" class="buysell-cc-choosen dropdown-indicator" data-toggle="dropdown">
+                                    <div class="coin-item coin-btc">
+                                        <div class="coin-icon">
+                                            <em class="icon ni ni-sign-btc-alt"></em>
+                                        </div>
+                                        <div class="coin-info">
+                                            <span class="coin-name">PRINCIPALE (CFA)</span>
+                                            <span class="coin-text">Last Order: Jan 23, 2021</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div><!-- .dropdown -->
+                        </div><!-- .buysell-field -->
+
+                        <div class="buysell-field form-group">
+                            <div class="form-label-group">
+                                <label class="form-label" for="buysell-amount">Numero de Téléphone</label>
+                            </div>
+                            <div class="form-control-group">
+                                <ngx-intl-tel-input [cssClass]="'form-control form-control-lg form-control-number' "
+                                    [enablePlaceholder]="true" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.Mali" 
+                                    [maxLength]="15" [tooltipField]="TooltipLabel.Name" [onlyCountries]="onlyCountries" [phoneValidation]="true"
+                                    [separateDialCode]="true" [numberFormat]="PhoneNumberFormat.National"
+                                    name="phone" formControlName="phone">
+                                </ngx-intl-tel-input>
+                            </div>
+                        </div><!-- .buysell-field -->
+                        <div class="buysell-field form-group">
+                            <div class="form-label-group">
+                                <label class="form-label" for="buysell-amount">Montant</label>
+                            </div>
+                            <div class="form-control-group">
+                                <input type="text" class="form-control form-control-lg form-control-number" id="buysell-amount" name="bs-amount" placeholder="0.055960">
+                                <div class="form-dropdown">
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-indicator-caret" data-toggle="dropdown" data-offset="0,2">CFA</a>
+                                        <div class="dropdown-menu dropdown-menu-xxs dropdown-menu-right text-center">
+                                            <ul class="link-list-plain">
+                                                <li><a href="#">EUR</a></li>
+                                                <li><a href="#">CAD</a></li>
+                                                <li><a href="#">YEN</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-note-group">
+                                <span class="buysell-min form-note-alt">Minimum: 500 CFA</span>
+                            </div>
+                        </div><!-- .buysell-field -->
+                        <div class="buysell-field form-action">
+                            <button class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#buy-coin" (click)="confirm(modalConfirm)" >Confirmer</button>
+                        </div><!-- .buysell-field -->
+                        <div class="form-note text-base text-center">Note: our transfer fee included, <a href="#">see our fees</a>.</div>
+                    </form><!-- .buysell-form -->
+                </div><!-- .buysell-block -->
+            </div><!-- .buysell -->
+        </div>
+    </div>
+</div>
+<!-- content @e -->
+
+
+<ng-template #modalConfirm let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Confirmation</h4>
+      <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body modal-body-lg">
+            <div class="nk-block-head nk-block-head-xs text-center">
+                <h5 class="nk-block-title">Confirm le Dépot</h5>
+                <div class="nk-block-text">
+                    <div class="caption-text">Dépot de <strong>500.0</strong> CFA sur le <strong>78648004</strong></div>
+                    <span class="sub-text-sm">Frais : 0 CFA</span>
+                </div>
+            </div>
+            <div class="nk-block">
+                <div class="buysell-overview">
+                    <ul class="buysell-overview-list">
+                        <li class="buysell-overview-item">
+                            <span class="pm-title">Nom</span>
+                            <span class="pm-currency">Daouda Beye &nbsp;<em class="icon ni ni-user"></em></span>
+                        </li>
+                        <li class="buysell-overview-item">
+                            <span class="pm-title">Numero</span>
+                            <span class="pm-currency"><span>78648004</span>&nbsp; <em class="icon ni ni-mobile"></em> </span>
+                        </li>
+
+                        <li class="buysell-overview-item">
+                            <span class="pm-title">Montant Dépot</span>
+                            <span class="pm-currency"><span>500.00</span>&nbsp; <em class="icon ni ni-wallet-saving"></em></span>
+                        </li>
+                    </ul>
+                    <div class="sub-text-sm">* Our transaction fee are included. <a href="#">See transaction fee</a></div>
+                </div>
+                <div class="buysell-field form-group">
+                    <div class="form-label-group">
+                        <label class="form-label">Compte Opération</label>
+                        <a href="#" class="link">Modifier</a>
+                    </div>
+                    <input type="hidden" value="btc" name="bs-currency" id="buysell-choose-currency-modal">
+                    <div class="dropdown buysell-cc-dropdown">
+                        <a href="#" class="buysell-cc-choosen dropdown-indicator" data-toggle="dropdown">
+                            <div class="coin-item coin-btc">
+                                <div class="coin-icon">
+                                    <em class="icon ni ni-sign-btc-alt"></em>
+                                </div>
+                                <div class="coin-info">
+                                    <span class="coin-name">PRINCIPALE</span>
+                                    <span class="coin-text">1X38 * * * * YW94</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div><!-- .dropdown -->
+                </div><!-- .buysell-field -->
+                <div class="buysell-field form-action text-center">
+                    <div>
+                        <button (click)="modal.close('OK')" class="btn btn-primary btn-lg" data-dismiss="modal" data-toggle="modal" data-target="#confirm-coin">Confirmer l'opération</button>
+                    </div>
+                    <div class="pt-3">
+                        <button (click)="modal.dismiss('Cancel')" data-dismiss="modal" class="link link-danger">Annuler l'opération</button>
+                    </div>
+                </div>
+            </div><!-- .nk-block -->
+        </div><!-- .modal-body -->
+    </div>
+</ng-template>
+
+<ng-template #successModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Confirmation</h4>
+      <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body modal-body-lg text-center">
+            <div class="nk-modal">
+                <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-check bg-success"></em>
+                <h4 class="nk-modal-title">Opération effectuée avec succès!</h4>
+                <div class="nk-modal-text">
+                    <p class="caption-text">Vous venez de faire un dépot de <strong>500.00</strong> CFA sur le <strong>78648004</strong>.</p>
+                    <p class="sub-text-sm">Vous pouvez consulter l'historique de vos transactions. <a href="#"> Ici</a></p>
+                </div>
+                <div class="nk-modal-action-lg">
+                    <ul class="btn-group gx-4">
+                        <li><button (click)="modal.dismiss('Cancel')" class="btn btn-lg btn-mw btn-primary">OK</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- .modal-body -->
+    </div>
+</ng-template>
+
+<ng-template #failedModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Confirmation</h4>
+      <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body modal-body-lg text-center">
+            <div class="nk-modal">
+                <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-na bg-danger"></em>
+                <h4 class="nk-modal-title">Echec de l'opération !</h4>
+                <div class="nk-modal-action-lg">
+                    <ul class="btn-group gx-4">
+                        <li><button (click)="modal.dismiss('Cancel')" class="btn btn-lg btn-mw btn-primary">OK</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- .modal-body -->
+    </div>
+</ng-template>

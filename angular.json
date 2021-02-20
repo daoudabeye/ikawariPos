@@ -28,9 +28,15 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/styles/app/_app.scss",
+              "src/assets/dashlite140/scss/dashlite.scss",
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/echarts/dist/echarts.min.js",
+              "src/assets/dashlite140/js/scripts.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -43,7 +49,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -66,7 +71,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ikawari-pos:build"
+            "browserTarget": "ikawari-pos:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -94,7 +100,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [ ]
           }
         },
         "lint": {
