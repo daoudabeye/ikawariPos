@@ -178,15 +178,15 @@
                         <div class="nk-tb-col nk-tb-col-tools"></div>
                     </div><!-- .nk-tb-item -->
                     <div class="nk-tb-item"
-                    *ngFor="let item of products | paginate: { itemsPerPage: pageSize, currentPage: page }; let i = index" 
+                    *ngFor="let item of orders | paginate: { itemsPerPage: pageSize, currentPage: page }; let i = index" 
                     [@animate]="{value:'*',params:{delay: (i*100)+'ms', y:'50px'}}"
                     >
                         <div class="nk-tb-col tb-col-lg">
-                            <span class="tb-odr-id"><a href="#">#746F5K2</a></span>
+                            <span class="tb-odr-id"><a href="#">#{{item.id}}</a></span>
                         </div>
                         <div class="nk-tb-col tb-col-lg">
-                            <span class="tb-lead-sub">YWLX52JG73</span>
-                            <span class="badge badge-dot badge-success">Deposit</span>
+                            <span class="tb-lead-sub">{{item.mtcn}}</span>
+                            <span class="badge badge-dot badge-success">{{item.pin}}</span>
                         </div>
 
                         <div class="nk-tb-col">
@@ -195,38 +195,38 @@
                                     <em class="icon ni ni-arrow-up-right"></em>
                                 </div>
                                 <div class="nk-tnx-type-text">
-                                    <span class="tb-lead">Deposited Funds</span>
-                                    <span class="tb-date">18/10/2019 12:04 PM</span>
+                                    <span class="tb-lead">{{item.source}}</span>
+                                    <span class="tb-date">{{item.date}}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="nk-tb-col tb-col-xxl">
-                            <span class="tb-lead-sub">Using PayPal Account</span>
-                            <span class="tb-sub">mypay*****com</span>
+                            <span class="tb-lead-sub">From {{item.originCountryIso}}</span>
+                            <span class="tb-sub">{{item.reference}}</span>
                         </div>
                         <div class="nk-tb-col text-right">
-                            <span class="tb-amount">+ 0.010201 <span>BTC</span></span>
-                            <span class="tb-amount-sm">1290.49 USD</span>
+                            <span class="tb-amount">{{item.amount}} <span>CFA</span></span>
+                            <span class="tb-amount-sm">{{item.amountPayedDestination}}</span>
                         </div>
                         <div class="nk-tb-col text-right tb-col-sm">
-                            <span class="tb-amount">1.30910201 <span>BTC</span></span>
-                            <span class="tb-amount-sm">101290.49 USD</span>
+                            <span class="tb-amount">{{item.paymentMode}}</span>
+                            <span class="tb-amount-sm">{{item.bankName}}</span>
                         </div>
                         <div class="nk-tb-col nk-tb-col-status">
                             <div class="dot dot-success d-md-none"></div>
-                            <span class="badge badge-sm badge-dim badge-outline-success d-none d-md-inline-flex">Completed</span>
+                            <span class="badge badge-sm badge-dim badge-outline-success d-none d-md-inline-flex">{{item.status}}</span>
                         </div>
                         <div class="nk-tb-col nk-tb-col-tools">
                             <ul class="nk-tb-actions gx-2">
                                 <li class="nk-tb-action-hidden">
-                                    <a href="#tranxDetails" data-toggle="modal" class="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip" title="Details"><em class="icon ni ni-eye"></em></a>
+                                    <button (click)="showDetails(modalDetails)" class="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip" title="Details"><em class="icon ni ni-eye"></em></button>
                                 </li>
                                 <li>
                                     <div class="dropdown">
                                         <a href="#" class="dropdown-toggle bg-white btn btn-sm btn-outline-light btn-icon" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <ul class="link-list-opt">
-                                                <li><a href="#"><em class="icon ni ni-done"></em><span>Approve</span></a></li>
+                                                <li><a href="#"><em class="icon ni ni-done" (click)="showDetails(modalDetails, item)"></em><span>Approve</span></a></li>
                                                 <li><a href="#"><em class="icon ni ni-cross-round"></em><span>Reject</span></a></li>
                                                 <li><a href="#"><em class="icon ni ni-repeat"></em><span>Check</span></a></li>
                                                 <li><a href="#tranxDetails" data-toggle="modal"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
@@ -247,3 +247,90 @@
         </div><!-- .card-inner-group -->
     </div><!-- .card -->
 </div><!-- .nk-block -->
+
+<ng-template #modalDetails let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Détails</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body modal-body-md">
+            <div class="nk-modal-head mb-3 mb-sm-5">
+                <h4 class="nk-modal-title title">Transaction <small class="text-primary">#{{selected?.id}}</small></h4>
+            </div>
+            <div class="nk-tnx-details">
+                <div class="nk-block-between flex-wrap g-3">
+                    <div class="nk-tnx-type">
+                        <div class="nk-tnx-type-icon bg-warning text-white">
+                            <em class="icon ni ni-arrow-up-right"></em>
+                        </div>
+                        <div class="nk-tnx-type-text">
+                            <h5 class="title">{{selected?.amount}}CFA</h5>
+                            <span class="sub-text mt-n1">{{selected?.date}}</span>
+                        </div>
+                    </div>
+                    <ul class="align-center flex-wrap gx-3">
+                        <li>
+                            <span class="badge badge-sm badge-success">{{selected?.status}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nk-modal-head mt-sm-5 mt-4 mb-4">
+                    <h5 class="title">Transaction Info</h5>
+                </div>
+                <div class="row gy-3">
+                    <div class="col-lg-6">
+                        <span class="sub-text">Order ID</span>
+                        <span class="caption-text">{{selected?.mtcn}}</span>
+                    </div>
+                    <div class="col-lg-6">
+                        <span class="sub-text">Reference ID</span>
+                        <span class="caption-text text-break">{{selected?.reference}}</span>
+                    </div>
+                    <div class="col-lg-6">
+                        <span class="sub-text">Transaction Fee</span>
+                        <span class="caption-text">{{selected?.fee}}</span>
+                    </div>
+                    <div class="col-lg-6">
+                        <span class="sub-text">Amount</span>
+                        <span class="caption-text">{{selected?.amountPayedDestination}} CFA</span>
+                    </div>
+                </div><!-- .row -->
+                <div class="nk-modal-head mt-sm-5 mt-4 mb-4">
+                    <h5 class="title">Transaction Details</h5>
+                </div>
+                <div class="row gy-3">
+                    <div class="col-lg-6">
+                        <span class="sub-text">Transaction Type</span>
+                        <span class="caption-text">{{selected?.paymentMode}}</span>
+                    </div>
+                    <div class="col-lg-6">
+                        <span class="sub-text">Payment Gateway</span>
+                        <span class="caption-text align-center">FROM <span class="badge badge-primary ml-2 text-white">{{selected?.source}}</span></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <span class="sub-text">Payment From</span>
+                        <span class="caption-text text-break">{{selected?.sender.name}}</span>
+                    </div>
+                    <div class="col-lg-6">
+                        <span class="sub-text">Payment To</span>
+                        <span class="caption-text text-break">{{selected?.beneficiary.name}}</span>
+                    </div>
+                    <div class="col-lg-12">
+                        <span class="sub-text">Transaction Hash</span>
+                        <span class="caption-text text-break">{{selected?.id}}</span>
+                    </div>
+                    <div class="col-lg-12">
+                        <span class="sub-text">Details</span>
+                        <span class="caption-text">{{selected?.bankAccountNumber}}</span>
+                    </div>
+                </div><!-- .row -->
+            </div><!-- .nk-tnx-details -->
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark btn-rounded" (click)="modal.close('ok')">PAYER</button>
+    </div>
+  </ng-template>

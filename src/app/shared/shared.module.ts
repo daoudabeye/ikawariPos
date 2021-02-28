@@ -9,6 +9,7 @@ import { SharedComponentsModule } from './components/shared-components.module';
 import { SharedDirectivesModule } from './directives/shared-directives.module';
 import { SharedPipesModule } from './pipes/shared-pipes.module';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +20,7 @@ import { SharedPipesModule } from './pipes/shared-pipes.module';
     SharedComponentsModule,
     SharedDirectivesModule,
     SharedPipesModule,
-    RouterModule  ]
+    RouterModule
+  ]
 })
 export class SharedModule { }

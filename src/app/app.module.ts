@@ -13,6 +13,7 @@ import { JwtInterceptor } from './shared/services/jwt.interceptor';
 import { ErrorInterceptor } from './shared/error.interceptor';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import {NgxIntlTelInputModule} from "ngx-intl-tel-input";
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,12 @@ import {NgxIntlTelInputModule} from "ngx-intl-tel-input";
     BrowserAnimationsModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
     SharedModule,
-    OAuthModule.forRoot(),
+    OAuthModule.forRoot({
+      resourceServer:{
+        allowedUrls : [environment.apiMainUrl, environment.apiUrl],
+        sendAccessToken: true
+      }
+    }),
     NgxIntlTelInputModule
   ],
   providers: [

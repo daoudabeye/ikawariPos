@@ -3,9 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  app_name: 'LIFA',
   production: false,
   apiUrl: 'http://localhost:4000',
-  authApiUrl: 'https://key.ikanet.ml/auth'
+  authApiUrl: 'https://key.ikanet.ml/auth',
+  apiMainUrl: 'http://localhost:8091'
 };
 
 /*

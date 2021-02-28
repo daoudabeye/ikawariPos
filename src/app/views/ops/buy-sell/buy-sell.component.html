@@ -14,27 +14,47 @@
         <div class="nk-content-body">
             <div class="buysell wide-xs m-auto">
                 <div class="buysell-title text-center">
-                    <h2 class="title">Faire un deposit!</h2>
+                    <h2 class="title">Operation {{config.name}}!</h2>
+                    <alert></alert>
                 </div><!-- .buysell-title -->
                 <div class="buysell-block">
-                    <form action="#" class="buysell-form">
+                    <form [formGroup]="opsForm" (ngSubmit)="confirm(modalConfirm)" class="buysell-form">
                         <div class="buysell-field form-group">
                             <div class="form-label-group">
                                 <label class="form-label">Compte d'opération</label>
                             </div>
                             <input type="hidden" value="btc" name="bs-currency" id="buysell-choose-currency">
-                            <div class="dropdown buysell-cc-dropdown">
-                                <a href="#" class="buysell-cc-choosen dropdown-indicator" data-toggle="dropdown">
+                            
+                            <div class="dropdown buysell-cc-dropdown" ngbDropdown>
+                                <span ngbDropdownToggle class="buysell-cc-choosen dropdown-indicator" data-toggle="dropdown">
                                     <div class="coin-item coin-btc">
                                         <div class="coin-icon">
                                             <em class="icon ni ni-sign-btc-alt"></em>
                                         </div>
                                         <div class="coin-info">
-                                            <span class="coin-name">PRINCIPALE (CFA)</span>
-                                            <span class="coin-text">Last Order: Jan 23, 2021</span>
+                                            <span class="coin-name">{{defaultWallet.type}} ({{defaultWallet.currency}})</span>
+                                            <span class="coin-text">Last Order: {{defaultWallet.lastOperation}}</span>
                                         </div>
                                     </div>
-                                </a>
+                                </span>
+
+                                <div ngbDropdownMenu class="dropdown-menu dropdown-menu-auto dropdown-menu-mxh">
+                                    <ul class="buysell-cc-list">
+                                        <li ngbDropdownItem class="buysell-cc-item selected" *ngFor="let wa of wallets" (click)="switchWallet(wa)">
+                                            <span class="buysell-cc-opt" data-currency="btc">
+                                                <div class="coin-item coin-btc">
+                                                    <div class="coin-icon">
+                                                        <em class="icon ni ni-sign-btc-alt"></em>
+                                                    </div>
+                                                    <div class="coin-info">
+                                                        <span class="coin-name">{{wa.type}} ({{wa.currency}})</span>
+                                                        <span class="coin-text">Last Order: {{wa.lastOperation}}</span>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div><!-- .dropdown-menu -->
                             </div><!-- .dropdown -->
                         </div><!-- .buysell-field -->
 
@@ -46,8 +66,7 @@
                                 <ngx-intl-tel-input [cssClass]="'form-control form-control-lg form-control-number' "
                                     [enablePlaceholder]="true" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.Mali" 
                                     [maxLength]="15" [tooltipField]="TooltipLabel.Name" [onlyCountries]="onlyCountries" [phoneValidation]="true"
-                                    [separateDialCode]="true" [numberFormat]="PhoneNumberFormat.National"
-                                    name="phone" formControlName="phone">
+                                    [separateDialCode]="true" [numberFormat]="PhoneNumberFormat.National" formControlName="receiverMobile">
                                 </ngx-intl-tel-input>
                             </div>
                         </div><!-- .buysell-field -->
@@ -56,26 +75,26 @@
                                 <label class="form-label" for="buysell-amount">Montant</label>
                             </div>
                             <div class="form-control-group">
-                                <input type="text" class="form-control form-control-lg form-control-number" id="buysell-amount" name="bs-amount" placeholder="0.055960">
+                                <input type="text" class="form-control form-control-lg form-control-number" id="buysell-amount" 
+                                name="bs-amount" placeholder="{{config.minAmount}}" [disabled]="config.enabled" formControlName="sendingAmount">
                                 <div class="form-dropdown">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-indicator-caret" data-toggle="dropdown" data-offset="0,2">CFA</a>
-                                        <div class="dropdown-menu dropdown-menu-xxs dropdown-menu-right text-center">
+                                    <div ngbDropdown class="dropdown">
+                                        <div ngbDropdownToggle href="#" class="dropdown-indicator-caret" data-toggle="dropdown" data-offset="0,2">{{defaultCurrency}}</div>
+                                        <div ngbDropdownMenu class="dropdown-menu dropdown-menu-xxs dropdown-menu-right text-center">
                                             <ul class="link-list-plain">
-                                                <li><a href="#">EUR</a></li>
-                                                <li><a href="#">CAD</a></li>
-                                                <li><a href="#">YEN</a></li>
+                                                <li ngbDropdownItem *ngFor="let cur of config.availableCurrenciesIso" (click)="switchCurrency(cur)" ><span href="#">{{cur}}</span></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-note-group">
-                                <span class="buysell-min form-note-alt">Minimum: 500 CFA</span>
+                                <span class="buysell-min form-note-alt">Minimum: {{config.minAmount}} {{defaultCurrency}}</span>
                             </div>
                         </div><!-- .buysell-field -->
                         <div class="buysell-field form-action">
-                            <button class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#buy-coin" (click)="confirm(modalConfirm)" >Confirmer</button>
+                            <button class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#buy-coin" 
+                            [disabled]="config.enabled" >Confirmer</button>
                         </div><!-- .buysell-field -->
                         <div class="form-note text-base text-center">Note: our transfer fee included, <a href="#">see our fees</a>.</div>
                     </form><!-- .buysell-form -->
@@ -99,7 +118,7 @@
             <div class="nk-block-head nk-block-head-xs text-center">
                 <h5 class="nk-block-title">Confirm le Dépot</h5>
                 <div class="nk-block-text">
-                    <div class="caption-text">Dépot de <strong>500.0</strong> CFA sur le <strong>78648004</strong></div>
+                    <div class="caption-text">{{config.name}} de <strong>{{f.sendingAmount.value}}</strong> {{defaultCurrency}} sur le <strong>{{f.receiverMobile.value.e164Number}}</strong></div>
                     <span class="sub-text-sm">Frais : 0 CFA</span>
                 </div>
             </div>
@@ -108,16 +127,16 @@
                     <ul class="buysell-overview-list">
                         <li class="buysell-overview-item">
                             <span class="pm-title">Nom</span>
-                            <span class="pm-currency">Daouda Beye &nbsp;<em class="icon ni ni-user"></em></span>
+                            <span class="pm-currency">{{customer.lastName}}&nbsp;{{customer.firstName}} &nbsp;<em class="icon ni ni-user"></em></span>
                         </li>
                         <li class="buysell-overview-item">
                             <span class="pm-title">Numero</span>
-                            <span class="pm-currency"><span>78648004</span>&nbsp; <em class="icon ni ni-mobile"></em> </span>
+                            <span class="pm-currency"><span>{{customer.mobilePhone}}</span>&nbsp; <em class="icon ni ni-mobile"></em> </span>
                         </li>
 
                         <li class="buysell-overview-item">
                             <span class="pm-title">Montant Dépot</span>
-                            <span class="pm-currency"><span>500.00</span>&nbsp; <em class="icon ni ni-wallet-saving"></em></span>
+                            <span class="pm-currency"><span>{{f.sendingAmount.value}}</span>&nbsp; <em class="icon ni ni-wallet-saving"></em></span>
                         </li>
                     </ul>
                     <div class="sub-text-sm">* Our transaction fee are included. <a href="#">See transaction fee</a></div>
@@ -128,18 +147,36 @@
                         <a href="#" class="link">Modifier</a>
                     </div>
                     <input type="hidden" value="btc" name="bs-currency" id="buysell-choose-currency-modal">
-                    <div class="dropdown buysell-cc-dropdown">
-                        <a href="#" class="buysell-cc-choosen dropdown-indicator" data-toggle="dropdown">
+                    <div class="dropdown buysell-cc-dropdown" ngbDropdown>
+                        <span ngbDropdownToggle class="buysell-cc-choosen dropdown-indicator" data-toggle="dropdown">
                             <div class="coin-item coin-btc">
                                 <div class="coin-icon">
                                     <em class="icon ni ni-sign-btc-alt"></em>
                                 </div>
                                 <div class="coin-info">
-                                    <span class="coin-name">PRINCIPALE</span>
-                                    <span class="coin-text">1X38 * * * * YW94</span>
+                                    <span class="coin-name">{{defaultWallet.type}} ({{defaultWallet.currency}})</span>
+                                    <span class="coin-text">Last Order: {{defaultWallet.lastOperation}}</span>
                                 </div>
                             </div>
-                        </a>
+                        </span>
+
+                        <div ngbDropdownMenu class="dropdown-menu dropdown-menu-auto dropdown-menu-mxh">
+                            <ul class="buysell-cc-list">
+                                <li ngbDropdownItem class="buysell-cc-item selected" *ngFor="let wa of wallets" (click)="switchWallet(wa)">
+                                    <span class="buysell-cc-opt" data-currency="btc">
+                                        <div class="coin-item coin-btc">
+                                            <div class="coin-icon">
+                                                <em class="icon ni ni-sign-btc-alt"></em>
+                                            </div>
+                                            <div class="coin-info">
+                                                <span class="coin-name">{{wa.type}} ({{wa.currency}})</span>
+                                                <span class="coin-text">Last Order: {{wa.lastOperation}}</span>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div><!-- .dropdown-menu -->
                     </div><!-- .dropdown -->
                 </div><!-- .buysell-field -->
                 <div class="buysell-field form-action text-center">

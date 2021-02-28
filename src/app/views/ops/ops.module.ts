@@ -12,8 +12,11 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
 
-
+const ngWizardConfig: NgWizardConfig = {
+  theme: THEME.default
+};
 
 @NgModule({
   declarations: [BuySellComponent, OrdersComponent, TransactionsComponent, OperationComponent],
@@ -27,7 +30,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgxIntlTelInputModule,
     NgxPaginationModule,
     NgxDatatableModule,
-    NgbModule
+    NgbModule,
+    NgWizardModule.forRoot(ngWizardConfig)
   ]
 })
 export class OpsModule { }
