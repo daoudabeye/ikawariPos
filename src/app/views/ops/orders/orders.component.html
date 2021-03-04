@@ -219,7 +219,10 @@
                         <div class="nk-tb-col nk-tb-col-tools">
                             <ul class="nk-tb-actions gx-2">
                                 <li class="nk-tb-action-hidden">
-                                    <button (click)="showDetails(modalDetails)" class="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip" title="Details"><em class="icon ni ni-eye"></em></button>
+                                    <button (click)="showDetails(modalDetails, item)" class="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip" title="Details"><em class="icon ni ni-eye"></em></button>
+                                </li>
+                                <li class="nk-tb-action-hidden">
+                                    <button (click)="payOrder(item)" class="bg-white btn btn-sm btn-outline-light btn-icon btn-tooltip" title="Details"><em class="icon ni ni-check"></em></button>
                                 </li>
                                 <li>
                                     <div class="dropdown">

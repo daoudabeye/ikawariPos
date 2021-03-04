@@ -1,6 +1,6 @@
 export class Order {
     id: number;
-    pin: string;
+    pin: boolean;
     mtcn: string;
     paymentMode: PaymentMode;
     date: string;

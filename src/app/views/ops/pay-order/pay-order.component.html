@@ -1,0 +1,380 @@
+<div class="breadcrumb">
+    <h1>Paiement</h1>
+    <ul>
+      <li><a href="">Ops</a></li>
+      <li>pay</li>
+    </ul>
+</div>
+
+<div class="nk-content nk-content-lg nk-content-fluid">
+    <div class="container-xl wide-lg">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-lg">
+                    <div class="nk-block-head-content">
+                        <div class="nk-block-head-content">
+                            <h2 class="nk-block-title fw-normal">Prêt à faire le paiement?</h2>
+                        </div>
+                    </div>
+                </div><!-- nk-block-head -->
+                <div class="nk-block invest-block">
+                    <div class="row g-gs">
+                        <div class="col-lg-7">
+                            <div class="invest-field form-group">
+                                <div class="form-label-group">
+                                    <label class="form-label">Methode de paiement</label>
+                                </div>
+                                <input type="hidden" value="wallet" name="iv-wallet" id="invest-choose-wallet">
+                                <div class="dropdown buysell-cc-dropdown" ngbDropdown>
+                                    <span href="#" class="invest-cc-choosen dropdown-indicator" ngbDropdownToggle>
+                                        <div class="coin-item">
+                                            <div class="coin-icon">
+                                                <em class="icon ni ni-layers"></em>
+                                            </div>
+                                            <div class="coin-info">
+                                                <span class="coin-name">{{paymentMode}}</span>
+                                                <span class="coin-text">frais: 0.0</span>
+                                            </div>
+                                        </div>
+                                    </span>
+    
+                                    <div ngbDropdownMenu class="dropdown-menu dropdown-menu-auto dropdown-menu-mxh">
+                                        <ul class="buysell-cc-list">
+                                            <li ngbDropdownItem class="buysell-cc-item selected" *ngFor="let mode of paymentModes">
+                                                <span class="buysell-cc-opt" data-currency="btc" (click)="switchPaymentMode(mode)">
+                                                    <div class="coin-item coin-btc">
+                                                        <div class="coin-icon">
+                                                            <em class="icon ni ni-cc-new"></em>
+                                                        </div>
+                                                        <div class="coin-info">
+                                                            <span class="coin-name">{{mode}}</span>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div><!-- .dropdown-menu -->
+                                </div><!-- .dropdown -->
+                            </div><!-- .invest-field -->
+                            <form [formGroup]="payFormGroup" class="invest-form" *ngIf="!showBankDepositForm" 
+                                [@animate]="{value:'*',params:{y:'120px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+                                <div class="row g-gs">
+                                    <div class="col-lg-12">
+                                        <div class="invest-field form-group">
+                                            <mat-select-country appearance="outline" label="Pays Emetteur" formControlName="countryInput" 
+                                            (onCountrySelected)="onCountrySelected($event)" class="form-control-outlined" value="ML">
+        
+                                            </mat-select-country>
+                                        </div><!-- .invest-field -->
+        
+                                        <div class="invest-field form-group">
+                                            <input type="hidden" value="silver" name="iv-plan" id="invest-choose-plan">
+                                            <div class="dropdown buysell-cc-dropdown" ngbDropdown>
+                                                <span ngbDropdownToggle class="buysell-cc-choosen dropdown-indicator" data-toggle="dropdown">
+                                                    <div class="coin-item">
+                                                        <div class="coin-icon">
+                                                            <em class="icon ni ni-user-list-fill"></em>
+                                                        </div>
+                                                        <div class="coin-info">
+                                                            <span class="coin-name">{{idType}}</span>
+                                                            <span class="coin-text">Document d'identité du client</span>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                
+                                                <div ngbDropdownMenu class="dropdown-menu dropdown-menu-auto dropdown-menu-mxh">
+                                                    <ul class="buysell-cc-list">
+                                                        <li ngbDropdownItem class="buysell-cc-item selected" *ngFor="let type of idTypes">
+                                                            <span class="buysell-cc-opt" data-currency="btc" (click)="switchDocument(type)">
+                                                                <div class="coin-item coin-btc">
+                                                                    <div class="coin-icon">
+                                                                        <em class="icon ni ni-user-c"></em>
+                                                                    </div>
+                                                                    <div class="coin-info">
+                                                                        <span class="coin-name">{{type}}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </span>
+                                                        </li>
+                                                    </ul>
+                                                </div><!-- .dropdown-menu -->
+                                            </div><!-- .dropdown -->
+                                        </div><!-- .invest-field -->
+        
+                                        <div class="invest-field form-group">
+                                            <div class="form-label-group">
+                                                <label class="form-label">Numero du document d'identité</label>
+                                            </div>
+                                            <div class="form-control-group">
+                                                <div class="form-info">ID</div>
+                                                <input type="text" class="form-control form-control-amount form-control-lg" id="custom-amount" placeholder="numero id"
+                                                    formControlName="idNumber">
+                                                <div class="form-range-slider" id="amount-step"></div>
+                                            </div>
+                                            <div class="form-note pt-2">Note: Le format est different selon le pays</div>
+                                        </div><!-- .invest-field -->
+        
+                                        <div class="invest-field form-group">
+                                            <div class="form-label-group">
+                                                <label class="form-label">Date Expiration</label>
+                                            </div>
+                                            <input type="hidden" value="wallet" name="iv-wallet" id="invest-choose-wallet">
+                                            <div class="dropdown invest-cc-dropdown">
+                                                <mat-form-field appearance="fill" style="background-color: rgba(169, 169, 169, 0.438) !important;">
+                                                    <mat-label>Choose a date</mat-label>
+                                                    <input matInput [matDatepicker]="picker" formControlName="expiration">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker></mat-datepicker>
+                                                </mat-form-field>
+                                                                                          
+                                            </div><!-- .dropdown -->
+                                        </div><!-- .invest-field -->
+                                        <div class="invest-field form-group">
+                                            <div class="custom-control custom-control-xs custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="checkbox">
+                                                <label class="custom-control-label" for="checkbox">Je confirme<a href="#"> l'exactitude des informatins fournis.</a></label>
+                                            </div>
+                                        </div><!-- .invest-field -->
+                                    </div><!-- .col -->
+                                </div><!-- .row -->
+                            </form>
+        
+                            <form [formGroup]="depositFormGroup" class="invest-form" *ngIf="showBankDepositForm"
+                                [@animate]="{value:'*',params:{y:'120px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+                                <div class="row g-gs">
+                                    <div class="col-lg-7">
+        
+                                        <div class="invest-field form-group">
+                                            <div class="form-label-group">
+                                                <label class="form-label">Nom de Bank</label>
+                                            </div>
+                                            <div class="form-control-group">
+                                                <input type="text" class="form-control form-control-amount form-control-lg" id="custom-amount" placeholder="Désignation Bank"
+                                                    formControlName="banName">
+                                                <div class="form-range-slider" id="amount-step"></div>
+                                            </div>
+                                        </div><!-- .invest-field -->
+        
+                                        <div class="invest-field form-group">
+                                            <div class="form-label-group">
+                                                <label class="form-label">Numero de Compte</label>
+                                            </div>
+                                            <div class="form-control-group">
+                                                <div class="form-info">ID</div>
+                                                <input type="text" class="form-control form-control-amount form-control-lg" id="custom-amount" placeholder="numero de compte"
+                                                    formControlName="accountNumber">
+                                                <div class="form-range-slider" id="amount-step"></div>
+                                            </div>
+                                        </div><!-- .invest-field -->
+        
+                                        <div class="invest-field form-group">
+                                            <div class="form-label-group">
+                                                <label class="form-label">Date d'opération</label>
+                                            </div>
+                                            <input type="hidden" value="wallet" name="iv-wallet" id="invest-choose-wallet">
+                                            <div class="dropdown invest-cc-dropdown">
+                                                <mat-form-field appearance="fill" style="background-color: rgba(169, 169, 169, 0.438) !important;">
+                                                    <mat-label>Choose a date</mat-label>
+                                                    <input matInput [matDatepicker]="picker" formControlName="operationDate">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker></mat-datepicker>
+                                                </mat-form-field>
+                                                                                          
+                                            </div><!-- .dropdown -->
+                                        </div><!-- .invest-field -->
+        
+                                        <div class="invest-field form-group">
+                                            <div class="form-label-group">
+                                                <label class="form-label">Référence Opération</label>
+                                            </div>
+                                            <div class="form-control-group">
+                                                <div class="form-info">ID</div>
+                                                <input type="text" class="form-control form-control-amount form-control-lg" id="custom-amount" placeholder="reference d'operation"
+                                                    formControlName="depositReference">
+                                                <div class="form-range-slider" id="amount-step"></div>
+                                            </div>
+                                            <div class="form-note pt-2">Note: Le format est different selon le pays</div>
+                                        </div><!-- .invest-field -->
+        
+                                        <div class="invest-field form-group">
+                                            <div class="custom-control custom-control-xs custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="checkbox">
+                                                <label class="custom-control-label" for="checkbox">Je confirme<a href="#"> l'exactitude des informatins fournis.</a></label>
+                                            </div>
+                                        </div><!-- .invest-field -->
+                                    </div><!-- .col -->
+                                    
+                                </div><!-- .row -->
+                            </form>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-5 offset-xl-1" [@animate]="{value:'*',params:{x:'120px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+                            <div class="card card-bordered ml-lg-4 ml-xl-0">
+                                <div class="nk-iv-wg4">
+                                    <div class="nk-iv-wg4-sub">
+                                        <h6 class="nk-iv-wg4-title title">Details Transaction # {{order?.mtcn}}</h6>
+                                        <ul class="nk-iv-wg4-overview g-2">
+                                            <li>
+                                                <div class="sub-text">Expéditeur</div>
+                                                <div class="lead-text">{{order?.sender?.name}}&nbsp;{{order?.sender?.string}}&nbsp;{{order?.sender?.secondLastName}}</div>
+                                                <div class="lead-text">{{order?.sender?.phoneNumber}}&nbsp;{{order?.sender?.secondPhoneNumber}}</div>
+                                            </li>
+                                            <li>
+                                                <div class="sub-text">Bénéf</div>
+                                                <div class="lead-text">{{order?.beneficiary?.name}}&nbsp;{{order?.beneficiary?.string}}&nbsp;{{order?.beneficiary?.secondLastName}}</div>
+                                                <div class="lead-text">{{order?.beneficiary?.phoneNumber}}&nbsp;{{order?.beneficiary?.secondPhoneNumber}}</div>
+                                            </li>
+                                            <li>
+                                                <div class="sub-text">Origine</div>
+                                                <div class="lead-text">{{order?.originCountryIso}}</div>
+                                            </li>
+                                            <li>
+                                                <div class="sub-text">Code Pin</div>
+                                                <div class="lead-text">{{order?.pin ? 'OUI': 'NON'}}</div>
+                                            </li>
+                                            <li>
+                                                <div class="sub-text">Source</div>
+                                                <div class="lead-text">{{order?.source}}</div>
+                                                <div class="lead-text">{{order?.originAgencyCode}}</div>
+                                            </li>
+                                            <li>
+                                                <div class="sub-text">Agent</div>
+                                                <div class="lead-text">{{order?.originAgent}}</div>
+                                            </li>
+                                            <li>
+                                                <div class="sub-text">Dévise</div>
+                                                <div class="lead-text">{{order?.destinationCurrencyIso}}</div>
+                                            </li>
+                                            <li>
+                                                <div class="sub-text">Taux</div>
+                                                <div class="lead-text">{{order?.exchangeRate}}</div>
+                                            </li>
+                                        </ul>
+                                    </div><!-- .nk-iv-wg4-sub -->
+                                    <div class="nk-iv-wg4-sub">
+                                        <ul class="nk-iv-wg4-list">
+                                            <li>
+                                                <div class="sub-text">Methode de Paiement</div>
+                                                <div class="lead-text">{{order?.paymentMode}}</div>
+                                            </li>
+                                        </ul>
+                                    </div><!-- .nk-iv-wg4-sub -->
+                                    <div class="nk-iv-wg4-sub">
+                                        <ul class="nk-iv-wg4-list">
+                                            <li>
+                                                <div class="sub-text">Montant Envoyé</div>
+                                                <div class="lead-text">{{order?.amount}}&nbsp;{{order?.originCurrencyIso}}</div>
+                                            </li>
+                                            <li>
+                                                <div class="sub-text">Frais <span>(0.5%)</span></div>
+                                                <div class="lead-text">{{order?.fee}}&nbsp;{{order?.originCurrencyIso}}</div>
+                                            </li>
+                                        </ul>
+                                    </div><!-- .nk-iv-wg4-sub -->
+                                    <div class="nk-iv-wg4-sub">
+                                        <ul class="nk-iv-wg4-list">
+                                            <li>
+                                                <div class="lead-text">Total à Payer</div>
+                                                <div class="caption-text text-primary">{{order?.amountPayedDestination}}&nbsp;{{order?.destinationCurrencyIso}}</div>
+                                            </li>
+                                        </ul>
+                                    </div><!-- .nk-iv-wg4-sub -->
+                                    <div class="nk-iv-wg4-sub text-center bg-lighter">
+                                        <button (click)="confirm()" class="btn btn-lg btn-primary ttu">confirmer &amp; procéder</button>
+                                    </div><!-- .nk-iv-wg4-sub -->
+                                </div><!-- .nk-iv-wg4 -->
+                            </div><!-- .card -->
+                        </div><!-- .col -->
+                    </div>
+                </div><!-- .nk-block -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content @e -->
+
+<ng-template #pinModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Confirmation</h4>
+      <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body modal-body-md text-center">
+        <form [formGroup]="pinFormGroup">
+            <div class="nk-modal">
+                <h4 class="nk-modal-title">Confirm Your Payment</h4>
+                <div class="nk-modal-text">
+                    <p>Pour confirmer le paiement de <strong>{{order?.amountPayedDestination}} </strong> pour l'ordre de paiement #{{order?.mtcn}} . Veuillez saisir le code PIN de la commande afin de terminer le paiement ou annuler.</p>
+                </div>
+                <div class="nk-modal-form">
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-password-big text-center" formControlName="pinCode">
+                    </div>
+                </div>
+                <div class="nk-modal-action">
+                    <button class="btn btn-lg btn-mw btn-primary" (click)="confirmPinAndSubmit()">Confirm Payment</button>
+                    <div class="sub-text sub-text-alt mt-3 mb-4">This transaction will appear on your wallet statement as Payment * SILVER.</div>
+                    <a href="#" class="link link-soft" data-dismiss="modal">Cancel and return</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #successModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Confirmation</h4>
+      <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="modal-body modal-body-lg text-center">
+            <div class="nk-modal">
+                <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-check bg-success"></em>
+                <h4 class="nk-modal-title">Successfully sent payment!</h4>
+                <div class="nk-modal-text">
+                    <p class="sub-text">You have successfully order the Investment Plan of ‘Silver’ with amount of <strong>$250.00</strong> using your <strong>NioWallet</strong>.</p>
+                </div>
+                <div class="nk-modal-action-lg">
+                    <ul class="btn-group flex-wrap justify-center g-4">
+                        <li><a href="html/invest/invest.html" class="btn btn-lg btn-mw btn-primary">More Invest</a></li>
+                        <li><a href="html/invest/scheme-details.html" class="btn btn-lg btn-mw btn-dim btn-primary"><em class="icon ni ni-reports"></em><span>See the plan</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- .modal-body -->
+        <div class="modal-footer bg-lighter">
+            <div class="text-center w-100">
+                <p>Earn upto 1% for each friend your refer! <a href="#">Invite friends</a></p>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #failedModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Confirmation</h4>
+      <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body modal-body-lg text-center">
+            <div class="nk-modal">
+                <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-na bg-danger"></em>
+                <h4 class="nk-modal-title">Echec de l'opération !</h4>
+                <div class="nk-modal-text">
+                    <p class="sub-text">{{error}}</p>
+                </div>
+                <div class="nk-modal-action-lg">
+                    <ul class="btn-group gx-4">
+                        <li><button (click)="modal.dismiss('Cancel')" class="btn btn-lg btn-mw btn-primary">OK</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- .modal-body -->
+    </div>
+</ng-template>

@@ -78,7 +78,9 @@ export class NavigationService {
             sub: [
                 { icon: 'i-Add-File', name: 'Dépot', state: '/ops/buy-sell', type: 'link' },
                 { icon: 'i-Speach-Bubble-3', name: 'Opération', state: '/ops/operation', type: 'link' },
-                { icon: 'i-Email', name: 'Ordres', state: '/ops/orders', type: 'link' },
+                {   icon: 'i-Email', name: 'Ordres', state: '/ops/orders', type: 'link', 
+                    sub: [{ icon: 'i-Speach-Bubble-3', name: 'Transactions', state: '/ops/payorder', type: 'link' }]
+                },
                 { icon: 'i-Speach-Bubble-3', name: 'Transactions', state: '/ops/trans', type: 'link' },
             ]
         },

@@ -1,3 +1,5 @@
+import { PaymentMode } from "./sendForm";
+
 export class OperationConfig {
     name: string;
     operationConfigId: OperationConfigId;
@@ -11,15 +13,42 @@ export class OperationConfig {
     fixedFee: number;
 }
 
+export class PaymentForm {
+    orderId: number;
+    paymentMode: PaymentMode;
+    countryIso: string;
+    nationalId: NationalIdType;
+    idNumber: string;
+    expirationDate: string;
+    operationDate: string;
+    bankName: string;
+    accountNumber: string;
+    bankOperationRef: string;
+    pinCode: string;
+
+    hasError: boolean;
+    error: string;
+    
+}
+
+export class PinCodeCheck {
+    orderId: number;
+    pinCode: string;
+    result: boolean;
+    attemptLeft: number;
+    error: string;
+    
+}
+
 export class OperationConfigId{
     countryIsoCode: string;
     type: OperationType;
 }
 
-export enum PaymentMode{
-    BANK_DEPOSIT, CASH_PICKUP, CASH_DELIVERY, CASH_TO_WALLET
-}
-
 export enum OperationType{
     TRANSFERS, PAYMENT, DEPOSIT, WITHDRAWAL, SEND
+}
+
+export enum NationalIdType{
+    PASSPORT, NATIONAL_ID, CONSUL, AUTRE
 }

@@ -11,3 +11,6 @@
 @import '~ng-wizard/themes/ng_wizard_theme_arrows.min.css';
 //@import '~ng-wizard/themes/ng_wizard_theme_circles.min.css';
 //@import '~ng-wizard/themes/ng_wizard_theme_dots.min.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

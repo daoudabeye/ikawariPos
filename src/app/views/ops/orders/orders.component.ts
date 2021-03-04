@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
 import { Order } from 'src/app/shared/models/sendForm';
 import { DataLayerService } from 'src/app/shared/services/data-layer.service';
 import { OrderService } from 'src/app/shared/services/operations.service';
+import { PayOrderComponent } from '../pay-order/pay-order.component';
 
 @Component({
   selector: 'app-orders',
@@ -26,7 +28,8 @@ export class OrdersComponent implements OnInit {
   constructor(
     private dl: DataLayerService,
     private orderService: OrderService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -62,6 +65,10 @@ export class OrdersComponent implements OnInit {
     }, (reason) => {
       console.log('Err!', reason);
     });
+  }
+
+  payOrder(item: Order){
+    this.router.navigateByUrl('/ops/payorder', { state: { id: item.id} })
   }
 
 }

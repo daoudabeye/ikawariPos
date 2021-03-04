@@ -13,13 +13,20 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+import { PayOrderComponent } from './pay-order/pay-order.component';
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.default
 };
 
 @NgModule({
-  declarations: [BuySellComponent, OrdersComponent, TransactionsComponent, OperationComponent],
+  declarations: [BuySellComponent, OrdersComponent, TransactionsComponent, OperationComponent, PayOrderComponent],
   imports: [
     CommonModule,
     SharedComponentsModule,
@@ -31,7 +38,13 @@ const ngWizardConfig: NgWizardConfig = {
     NgxPaginationModule,
     NgxDatatableModule,
     NgbModule,
-    NgWizardModule.forRoot(ngWizardConfig)
+    NgWizardModule.forRoot(ngWizardConfig),
+    MatSelectCountryModule.forRoot('fr'),
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatMomentDateModule
   ]
 })
 export class OpsModule { }

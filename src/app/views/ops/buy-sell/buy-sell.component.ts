@@ -61,10 +61,17 @@ export class BuySellComponent implements OnInit {
   ngOnInit(): void {
     this.config = new OperationConfig;
     this.defaultWallet = new Wallet;
-    this.operationService.getConfig(OperationType.DEPOSIT).subscribe((config: OperationConfig) => {
-      this.config = config;
-      this.defaultCurrency = config.mainCurrencyIso;
-    });
+    this.operationService.getConfig(OperationType.DEPOSIT)
+      .subscribe(
+        (config: OperationConfig) => {
+        this.config = config;
+        this.defaultCurrency = config.mainCurrencyIso;},
+
+        (error) => {
+          this.alertService.error("Service Indisponible.");
+          this.loading = false;
+        }
+      );
 
     this.walletService.findMyWallets().
     subscribe((w: Wallet[]) => {
